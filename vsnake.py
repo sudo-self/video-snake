@@ -37,7 +37,7 @@ def install_youtube_dl():
     subprocess.Popen(['brew', 'install', 'youtube-dl'])
 #help window
 def open_help_popup():
-    help_text = "github.com/sudo-self"
+    help_text = "homebrew: https://brew.sh"
     popup = tk.Toplevel()
     popup.title("Help")
     popup.geometry("400x100")
@@ -45,7 +45,7 @@ def open_help_popup():
     label.pack(padx=10, pady=10)
 
 def open_github():
-    webbrowser.open(https://brew.sh")
+    webbrowser.open(https://github.com/sudo-self/video-snake/")
 
 root = tk.Tk()
 root.title("VideoSnake by sudo-self")
