@@ -45,13 +45,13 @@ def open_help_popup():
     label.pack(padx=10, pady=10)
 
 def open_github():
-    webbrowser.open("https://github.com/sudo-self/video-snake/")
+    webbrowser.open(https://brew.sh")
 
 root = tk.Tk()
 root.title("VideoSnake by sudo-self")
 
 
-label = tk.Label(root, text="github.com/sudo-self", fg='white', cursor="hand2")
+label = tk.Label(root, text="Homebrew", fg='white', cursor="hand2")
 label.pack()
 label.bind("<Button-1>", lambda e: open_github())
 
