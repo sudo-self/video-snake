@@ -45,7 +45,7 @@ def open_help_popup():
     label.pack(padx=10, pady=10)
 
 def open_github():
-    webbrowser.open(https://github.com/sudo-self/video-snake/")
+    webbrowser.open("https://github.com/sudo-self/video-snake/")
 
 root = tk.Tk()
 root.title("VideoSnake by sudo-self")
