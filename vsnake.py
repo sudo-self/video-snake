@@ -75,7 +75,7 @@ quit_button = tk.Button(button_frame, text="Quit", command=quit_program)
 quit_button.pack(side=tk.LEFT)
 
 
-download_button = tk.Button(button_frame, text="Snake", command=download_video)
+download_button = tk.Button(button_frame, text="🐍", command=download_video)
 download_button.pack(side=tk.LEFT)
 
 
