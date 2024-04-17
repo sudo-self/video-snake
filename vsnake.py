@@ -51,7 +51,7 @@ root = tk.Tk()
 root.title("VideoSnake by sudo-self")
 
 
-label = tk.Label(root, text="Homebrew", fg='white', cursor="hand2")
+label = tk.Label(root, text="/sudo-self", fg='white', cursor="hand2")
 label.pack()
 label.bind("<Button-1>", lambda e: open_github())
 
