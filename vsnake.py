@@ -1,3 +1,4 @@
+# Tech@JesseJesse.com
 import tkinter as tk
 import subprocess
 import pyperclip
@@ -31,10 +32,10 @@ def on_focus_out(event):
 #quit
 def quit_program():
     os.kill(os.getpid(), 2)
-
+#install tool
 def install_youtube_dl():
     subprocess.Popen(['brew', 'install', 'youtube-dl'])
-
+#help window
 def open_help_popup():
     help_text = "github.com/sudo-self"
     popup = tk.Toplevel()
@@ -61,7 +62,7 @@ url_entry.bind('<FocusIn>', on_focus_in)
 url_entry.bind('<FocusOut>', on_focus_out)
 url_entry.pack()
 
-
+#buttons
 button_frame = tk.Frame(root)
 button_frame.pack()
 
