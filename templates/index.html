@@ -35,7 +35,7 @@
             border-radius: 5px;
             outline: none;
         }
-        button[type="submit"] {
+        button[type="submit"], button[type="button"] {
             padding: 10px 20px;
             font-size: 16px;
             background-color: purple;
@@ -45,7 +45,7 @@
             cursor: pointer;
             transition: background-color 0.3s;
         }
-        button[type="submit"]:hover {
+        button[type="submit"]:hover, button[type="button"]:hover {
             background-color: #45a049;
         }
         a {
@@ -53,19 +53,46 @@
             color: #333;
             margin-top: 10px;
         }
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 5px solid #ccc;
+            border-top-color: #45a049;
+            animation: spin 1s infinite linear;
+            margin-top: 20px;
+            display: none; /* Initially hidden */
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
     </style>
 </head>
 <body>
     <h1>Video🐍Snake</h1>
-    <a href="/github" target="_blank">github.com/sudo-self</a>
+    <a href="/github" target="_blank">Snake ANY video by adding the URL</a>
     <div class="button-container">
-        <form action="/download" method="POST">
+        <form action="/download" method="POST" id="downloadForm">
             <input type="text" name="url" id="url" placeholder="Enter the full URL https://">
             <button type="submit">🐍</button>
         </form>
         <form id="pasteForm">
             <button type="button" onclick="pasteClipboard()">Paste</button>
         </form>
+        <div class="spinner" id="spinner"></div>
+        <a href="#" id="downloadLink" style="display: none;">Snaked!</a>
+        <a href="#" id="videoDownloadLink" style="display: none;">Download Video</a>
         <form action="/quit" method="POST">
             <button type="submit">Quit</button>
         </form>
@@ -74,6 +101,10 @@
         </form>
     </div>
     <a href="/help" target="_blank">Help</a>
+
+    <div class="footer">
+        <p>🐍</p>
+    </div>
 
     <script>
         function pasteClipboard() {
@@ -85,6 +116,48 @@
                     console.error('Failed to read clipboard contents: ', err);
                 });
         }
+
+        
+        function showSpinner() {
+            document.getElementById('spinner').style.display = 'block';
+            document.getElementById('downloadLink').style.display = 'none';
+            document.getElementById('videoDownloadLink').style.display = 'none';
+        }
+
+      
+        function showDownloadLink() {
+            document.getElementById('spinner').style.display = 'none';
+            document.getElementById('downloadLink').style.display = 'inline';
+        }
+
+      
+        function showVideoDownloadLink() {
+            document.getElementById('spinner').style.display = 'none';
+            document.getElementById('videoDownloadLink').style.display = 'inline';
+        }
+
+     
+        document.getElementById('downloadForm').addEventListener('submit', function(event) {
+            showSpinner(); // Show spinner when form is submitted
+
+            var url = document.getElementById('url').value;
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/download', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        showDownloadLink();
+                        showVideoDownloadLink();
+                    } else {
+                        console.error('Failed to download file: ' + xhr.status);
+                    }
+                }
+            };
+            xhr.send('url=' + encodeURIComponent(url));
+
+            event.preventDefault();
+        });
     </script>
 </body>
 </html>
