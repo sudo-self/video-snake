@@ -61,7 +61,7 @@
             border-top-color: #45a049;
             animation: spin 1s infinite linear;
             margin-top: 20px;
-            display: none;
+            display: none; /* Initially hidden */
         }
         @keyframes spin {
             0% { transform: rotate(0deg); }
@@ -73,7 +73,7 @@
             left: 0;
             width: 100%;
             background-color: #333;
-            color: green;
+            color: white;
             text-align: center;
             padding: 10px 0;
         }
@@ -81,18 +81,16 @@
 </head>
 <body>
     <h1>Video🐍Snake</h1>
-    <a href="/github" target="_blank">snake video by adding the URL</a>
+    <a href="/github" target="_blank">github.com/sudo-self</a>
     <div class="button-container">
-        <form action="/download" method="POST" id="downloadForm">
+        <form id="downloadForm">
             <input type="text" name="url" id="url" placeholder="Enter the full URL https://">
-            <button type="submit">🐍</button>
+            <button type="button" onclick="downloadVideo()">🐍</button>
         </form>
-        <form id="pasteForm">
-            <button type="button" onclick="pasteClipboard()">Paste</button>
-        </form>
+        <button type="button" onclick="pasteClipboard()">Paste</button>
         <div class="spinner" id="spinner"></div>
-        <a href="#" id="downloadLink" style="display: none;">Snaked!</a>
-        <a href="#" id="videoDownloadLink" style="display: none;">Download Video</a>
+        <a href="#" id="downloadLink" style="display: none;">Snaked!</a> <!-- Initially hidden -->
+        <a href="#" id="videoDownloadLink" style="display: none;">Download Video</a> <!-- Initially hidden -->
         <form action="/quit" method="POST">
             <button type="submit">Quit</button>
         </form>
@@ -117,28 +115,28 @@
                 });
         }
 
-        
+        // Show spinner and hide other elements
         function showSpinner() {
             document.getElementById('spinner').style.display = 'block';
             document.getElementById('downloadLink').style.display = 'none';
             document.getElementById('videoDownloadLink').style.display = 'none';
         }
 
-      
+        // Hide spinner and show download link
         function showDownloadLink() {
             document.getElementById('spinner').style.display = 'none';
             document.getElementById('downloadLink').style.display = 'inline';
         }
 
-      
+        // Hide spinner and show video download link
         function showVideoDownloadLink() {
             document.getElementById('spinner').style.display = 'none';
             document.getElementById('videoDownloadLink').style.display = 'inline';
         }
 
-     
-        document.getElementById('downloadForm').addEventListener('submit', function(event) {
-            showSpinner(); // Show spinner when form is submitted
+        // Function to download the video
+        function downloadVideo() {
+            showSpinner(); // Show spinner when download is initiated
 
             var url = document.getElementById('url').value;
             var xhr = new XMLHttpRequest();
@@ -147,17 +145,15 @@
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === XMLHttpRequest.DONE) {
                     if (xhr.status === 200) {
-                        showDownloadLink();
-                        showVideoDownloadLink();
+                        showDownloadLink(); // Show download link when download is complete
+                        showVideoDownloadLink(); // Show video download link when download is complete
                     } else {
-                        console.error('Failed to download file: ' + xhr.status);
+                        console.error('Failed to download video: ' + xhr.status);
                     }
                 }
             };
             xhr.send('url=' + encodeURIComponent(url));
-
-            event.preventDefault();
-        });
+        }
     </script>
 </body>
 </html>
