@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VideoSnake by sudo-self</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 36px;
+        }
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        form {
+            margin-bottom: 10px;
+        }
+        input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+        }
+        button[type="submit"] {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: purple;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        a {
+            text-decoration: none;
+            color: #333;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Video🐍Snake</h1>
+    <a href="/github" target="_blank">github.com/sudo-self</a>
+    <div class="button-container">
+        <form action="/download" method="POST">
+            <input type="text" name="url" id="url" placeholder="Enter the full URL https://">
+            <button type="submit">🐍</button>
+        </form>
+        <form id="pasteForm">
+            <button type="button" onclick="pasteClipboard()">Paste</button>
+        </form>
+        <form action="/quit" method="POST">
+            <button type="submit">Quit</button>
+        </form>
+        <form action="/install" method="POST">
+            <button type="submit">Install</button>
+        </form>
+    </div>
+    <a href="/help" target="_blank">Help</a>
+
+    <script>
+        function pasteClipboard() {
+            navigator.clipboard.readText()
+                .then(text => {
+                    document.getElementById('url').value = text;
+                })
+                .catch(err => {
+                    console.error('Failed to read clipboard contents: ', err);
+                });
+        }
+    </script>
+</body>
+</html>
+
+
