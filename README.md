@@ -1,4 +1,4 @@
-## A video download GUI based on youtube-dl<br>
+## A video download GUI and WebTool based on youtube-dl<br>
 
 ```
 git clone https://github.com/sudo-self/video-snake.git
