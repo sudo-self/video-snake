@@ -37,7 +37,7 @@ def install_youtube_dl():
     subprocess.Popen(['brew', 'install', 'youtube-dl'])
 #help window
 def open_help_popup():
-    help_text = "homebrew: https://brew.sh"
+    help_text = "visit JesseJesse.com"
     popup = tk.Toplevel()
     popup.title("Help")
     popup.geometry("400x100")
