@@ -5,16 +5,16 @@ import pyperclip
 import os
 import webbrowser
 import platform
+import threading
 
 def download_video():
     url = url_entry.get()
     if url:
-        download_video_thread(url)
+        threading.Thread(target=download_video_thread, args=(url,), daemon=True).start()
 
 def download_video_thread(url):
-    process = subprocess.run(['yt-dlp', url], capture_output=True, text=True)
-    out = process.stdout
-    err = process.stderr
+    process = subprocess.Popen(['yt-dlp', url], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    out, err = process.communicate()
     update_terminal(out, err)
     update_footer()
 
@@ -49,7 +49,7 @@ def quit_program():
     os.kill(os.getpid(), 2)
 
 def install_youtube_dl():
-    subprocess.run(['brew', 'install', 'youtube-dl'])
+    subprocess.Popen(['brew', 'install', 'youtube-dl'])
 
 def open_help_popup():
     help_text = "JesseJesse.com"
@@ -67,11 +67,11 @@ def update_footer():
 def open_directory(event=None):
     directory = os.path.dirname(os.path.realpath(__file__))
     if platform.system() == 'Darwin':  # macOS
-        subprocess.run(['open', directory])
+        subprocess.Popen(['open', directory])
     elif platform.system() == 'Linux':  # Linux
-        subprocess.run(['xdg-open', directory])
+        subprocess.Popen(['xdg-open', directory])
     elif platform.system() == 'Windows':  # Windows
-        subprocess.run(['explorer', directory])
+        subprocess.Popen(['explorer', directory])
 
 def update_gif(frame_number=0):
     global frames, gif_label, root
@@ -134,6 +134,13 @@ footer_label.pack()
 footer_label.bind("<Button-1>", open_directory)
 
 root.mainloop()
+
+
+
+
+
+
+
 
 
 
