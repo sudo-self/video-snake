@@ -97,7 +97,7 @@ install_button.pack(side=tk.LEFT)
 quit_button = tk.Button(button_frame, text="Quit", command=quit_program)
 quit_button.pack(side=tk.LEFT)
 
-download_button = tk.Button(button_frame, text="Snake&nbsp;🐍", command=download_video)
+download_button = tk.Button(button_frame, text="Snake🐍", command=download_video)
 download_button.pack(side=tk.LEFT)
 
 paste_button = tk.Button(button_frame, text="Paste", command=paste_from_clipboard)
