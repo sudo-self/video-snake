@@ -1,5 +1,5 @@
 ## A video download GUI and WebTool based on youtube-dl<br>
-### Paste the folling in terminal to launch
+### Paste in terminal to launch VideoSnake
 ```
 #Python tk
 git clone https://github.com/sudo-self/video-snake.git
