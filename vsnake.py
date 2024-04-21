@@ -58,6 +58,7 @@ def open_help_popup():
     popup.geometry("400x100")
     label = tk.Label(popup, text=help_text)
     label.pack(padx=10, pady=10)
+    label.bind("<Button-1>", lambda e: webbrowser.open("https://JesseJesse.com"))
 
 def open_github():
     webbrowser.open("https://github.com/sudo-self/video-snake/")
@@ -123,6 +124,8 @@ footer_label.pack()
 footer_label.bind("<Button-1>", open_directory)
 
 root.mainloop()
+
+
 
 
 
