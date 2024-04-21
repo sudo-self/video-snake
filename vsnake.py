@@ -1,3 +1,4 @@
+#Jesse@JesseJesse.com
 import tkinter as tk
 from PIL import Image, ImageTk, ImageSequence
 import subprocess
