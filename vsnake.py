@@ -124,3 +124,5 @@ footer_label.bind("<Button-1>", open_directory)
 
 root.mainloop()
 
+
+
