@@ -8,7 +8,7 @@ import webbrowser
 def download_video():
     url = url_entry.get()
     if url:
-        subprocess.Popen(['youtube-dl', url])
+        subprocess.Popen(['yt-dlp', url])
 
 def paste_from_clipboard():
     clipboard_text = pyperclip.paste()
