@@ -1,4 +1,4 @@
-## A video download GUI and WebTool based on youtube-dl<br>
+## A video download GUI written in python<br>
 ### Paste in terminal to launch VideoSnake
 ```
 #Python tk
