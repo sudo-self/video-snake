@@ -4,25 +4,25 @@ import subprocess
 import pyperclip
 import os
 import webbrowser
-import threading
 import platform
 
 def download_video():
     url = url_entry.get()
     if url:
-        threading.Thread(target=download_video_thread, args=(url,), daemon=True).start()
+        download_video_thread(url)
 
 def download_video_thread(url):
-    process = subprocess.Popen(['yt-dlp', url], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    out, err = process.communicate()
-    root.after(0, lambda: update_terminal(out, err))
-    root.after(0, lambda: update_footer())
+    process = subprocess.run(['yt-dlp', url], capture_output=True, text=True)
+    out = process.stdout
+    err = process.stderr
+    update_terminal(out, err)
+    update_footer()
 
 def update_terminal(out, err):
     terminal_output.config(state=tk.NORMAL)
     terminal_output.delete(1.0, tk.END)
-    terminal_output.insert(tk.END, out.decode("utf-8"))
-    terminal_output.insert(tk.END, err.decode("utf-8"))
+    terminal_output.insert(tk.END, out)
+    terminal_output.insert(tk.END, err)
     terminal_output.config(state=tk.DISABLED)
 
 def paste_from_clipboard():
@@ -36,20 +36,20 @@ def clear_url_entry(event=None):
     url_entry.config(fg='white')
 
 def on_focus_in(event):
-    if url_entry.get() == "Enter the full URL https://":
+    if url_entry.get() == "Enter the full URL and press the snake button":
         url_entry.delete(0, tk.END)
         url_entry.config(fg='white')
 
 def on_focus_out(event):
     if not url_entry.get():
-        url_entry.insert(0, "Enter the full URL https://")
+        url_entry.insert(0, "Enter the full URL and press the snake button")
         url_entry.config(fg='gray')
 
 def quit_program():
     os.kill(os.getpid(), 2)
 
 def install_youtube_dl():
-    subprocess.Popen(['brew', 'install', 'youtube-dl'])
+    subprocess.run(['brew', 'install', 'youtube-dl'])
 
 def open_help_popup():
     help_text = "JesseJesse.com"
@@ -67,11 +67,11 @@ def update_footer():
 def open_directory(event=None):
     directory = os.path.dirname(os.path.realpath(__file__))
     if platform.system() == 'Darwin':  # macOS
-        subprocess.Popen(['open', directory])
+        subprocess.run(['open', directory])
     elif platform.system() == 'Linux':  # Linux
-        subprocess.Popen(['xdg-open', directory])
+        subprocess.run(['xdg-open', directory])
     elif platform.system() == 'Windows':  # Windows
-        subprocess.Popen(['explorer', directory])
+        subprocess.run(['explorer', directory])
 
 def update_gif(frame_number=0):
     global frames, gif_label, root
@@ -80,10 +80,10 @@ def update_gif(frame_number=0):
     root.after(100, update_gif, frame_number)
 
 root = tk.Tk()
-root.title("VideoSnake v1.0 snake video from anywhere")
+root.title("Snake Video Anywhere")
 
 url_entry = tk.Entry(root, width=50, fg='gray', bd=2, relief=tk.SOLID)
-url_entry.insert(0, "Enter the full URL https://")
+url_entry.insert(0, "enter the full URL https:// and press the snake button")
 url_entry.bind('<FocusIn>', on_focus_in)
 url_entry.bind('<FocusOut>', on_focus_out)
 url_entry.pack()
@@ -97,7 +97,7 @@ install_button.pack(side=tk.LEFT)
 quit_button = tk.Button(button_frame, text="Quit", command=quit_program, bd=2, relief=tk.SOLID, bg='blue', fg='black')
 quit_button.pack(side=tk.LEFT)
 
-download_button = tk.Button(button_frame, text="Snake🐍", command=download_video, bd=2, relief=tk.SOLID, bg='blue', fg='black')
+download_button = tk.Button(button_frame, text="🐍", command=download_video, bd=2, relief=tk.SOLID, bg='blue', fg='black')
 download_button.pack(side=tk.LEFT)
 
 paste_button = tk.Button(button_frame, text="Paste", command=paste_from_clipboard, bd=2, relief=tk.SOLID, bg='blue', fg='black')
@@ -114,7 +114,7 @@ output_frame = tk.Frame(root)
 output_frame.pack(fill=tk.BOTH, expand=True)
 
 
-gif_path = "giphy.gif" 
+gif_path = "giphy.gif"
 gif_image = Image.open(gif_path)
 frames = [ImageTk.PhotoImage(img) for img in ImageSequence.Iterator(gif_image)]
 
@@ -129,7 +129,7 @@ terminal_output = tk.Text(output_frame, wrap=tk.WORD, height=4)
 terminal_output.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 terminal_output.config(state=tk.DISABLED)
 
-footer_label = tk.Label(root, text="Made with Love", fg='white', cursor="hand2")
+footer_label = tk.Label(root, text="sudo-self", fg='white', cursor="hand2")
 footer_label.pack()
 footer_label.bind("<Button-1>", open_directory)
 
