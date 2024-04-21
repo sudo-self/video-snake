@@ -1,4 +1,4 @@
-#Jesse@JesseJesse.com
+#Python tk Author: Jesse@JesseJesse.com
 import tkinter as tk
 from PIL import Image, ImageTk, ImageSequence
 import subprocess
@@ -67,11 +67,11 @@ def update_footer():
 
 def open_directory(event=None):
     directory = os.path.dirname(os.path.realpath(__file__))
-    if platform.system() == 'Darwin':  # macOS
+    if platform.system() == 'Darwin':  
         subprocess.Popen(['open', directory])
-    elif platform.system() == 'Linux':  # Linux
+    elif platform.system() == 'Linux': 
         subprocess.Popen(['xdg-open', directory])
-    elif platform.system() == 'Windows':  # Windows
+    elif platform.system() == 'Windows': 
         subprocess.Popen(['explorer', directory])
 
 def update_gif(frame_number=0):
@@ -84,7 +84,7 @@ root = tk.Tk()
 root.title("Snake Video Anywhere")
 
 url_entry = tk.Entry(root, width=50, fg='gray', bd=2, relief=tk.SOLID)
-url_entry.insert(0, "enter the full URL https:// and press the snake button")
+url_entry.insert(0, "enter the full URL and press the snake button")
 url_entry.bind('<FocusIn>', on_focus_in)
 url_entry.bind('<FocusOut>', on_focus_out)
 url_entry.pack()
@@ -130,7 +130,7 @@ terminal_output = tk.Text(output_frame, wrap=tk.WORD, height=4)
 terminal_output.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 terminal_output.config(state=tk.DISABLED)
 
-footer_label = tk.Label(root, text="sudo-self", fg='white', cursor="hand2")
+footer_label = tk.Label(root, text="python3 vsnake.py", fg='white', cursor="hand2")
 footer_label.pack()
 footer_label.bind("<Button-1>", open_directory)
 
