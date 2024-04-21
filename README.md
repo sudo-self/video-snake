@@ -1,5 +1,6 @@
 ## A video download GUI written in python<br>
-### Paste in terminal to launch VideoSnake
+##### Paste the following in terminal to run video snake
+(this assumes you have python installed)
 ```
 #Python tk
 git clone https://github.com/sudo-self/video-snake.git
