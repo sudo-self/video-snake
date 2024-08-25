@@ -1,6 +1,4 @@
-## A video download GUI written in python<br>
-##### Paste the following in terminal to run video snake
-(this assumes you have python installed)
+## A YTD GUI written in python<br>
 ```
 #Python tk
 git clone https://github.com/sudo-self/video-snake.git
